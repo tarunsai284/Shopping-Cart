@@ -1,3 +1,10 @@
 thead {
     color: #337AB7;
 }
+.image-for-product{
+    width:50px;
+    margin:2px;
+}
+td{
+    text-align: left;
+}
