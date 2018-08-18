@@ -15,34 +15,27 @@ export class ProductDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private _router: Router,
-    private _productService: ProductService) {
+    private router: Router,
+    private productService: ProductService) {
 
   }
 
   ngOnInit() {
-    let id = this.route.snapshot.paramMap.get('id');
-    this.pageTitle += `: ${id}`;
-    this.product = {
-      "productId": 10,
-      "productName": "Video Game Controller",
-      "productCode": "GMG-0042",
-      "releaseDate": "October 15, 2015",
-      "description": "Standard two-button video game controller",
-      "price": 35.95,
-      "starRating": 4.6,
-      "imageUrl": "http://openclipart.org/image/300px/svg_to_png/120337/xbox-controller_01.png"
+    let param = this.route.snapshot.paramMap.get('id');
+    if (param) {
+      const id = +param;
+      this.getProduct(id);
     }
   }
 
-  // getProduct(id: number) {
-  //   this._productService.getProduct(id).subscribe(
-  //     product => this.product = product,
-  //     error => this.errorMessage = <any>error);
-  // }
+  getProduct(id: number) {
+    this.productService.getProduct(id).subscribe(
+      product => this.product = product,
+      error => this.errorMessage = <any>error);
+  }
 
-  // onBack(): void {
-  //   this._router.navigate(['/products']);
-  // }
+  onBack(): void {
+    this.router.navigate(['/products']);
+  }
 
 }
