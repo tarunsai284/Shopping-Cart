@@ -5,18 +5,21 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { ProductListComponent } from './products/product-list.component';
 import { ProductCodePipe } from './products/product-code-pipe';
+import { StarComponent } from './shared/star.component';
+import { ProductService } from './products/product-service';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductListComponent,
-    ProductCodePipe
+    ProductCodePipe,
+    StarComponent
   ],
   imports: [
     BrowserModule,
     FormsModule
   ],
-  providers: [],
+  providers: [ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
