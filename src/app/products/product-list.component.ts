@@ -7,7 +7,7 @@ import { ProductService } from './product-service';
     templateUrl: './product-list.component.html',
     styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent{
+export class ProductListComponent implements OnInit{
     constructor(private productService: ProductService){
     }
 
@@ -16,6 +16,7 @@ export class ProductListComponent{
     products: IProduct[] = [];
     filteredProducts: IProduct[] = this.products;    
     _search: string;
+    errorMessage: string;
     get search(): string {
         return this._search;
     }
@@ -31,7 +32,10 @@ export class ProductListComponent{
     }
 
     ngOnInit(): void{
-        this.products = this.productService.getProducts();
-        this.filteredProducts = this.products;
+        this.productService.getProducts().subscribe(products => 
+            {
+                this.products = products;
+                this.filteredProducts = this.products;
+            },error => this.errorMessage = <any>error);
     }
 }
